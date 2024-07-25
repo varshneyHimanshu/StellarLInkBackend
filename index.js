@@ -39,12 +39,26 @@ app.use(
 );
 
 
+
+
 // middleware
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
+
+// bodyParser is a middleware that helps parse the body of incoming HTTP requests, making it easier to work with the data in your routes.
+// bodyParser.json() specifically parses JSON data from the request body. This means if a client sends a JSON object in the request body,
+//  this middleware will parse it into a JavaScript object and attach it to req.body.
+// { limit: "30mb" }: Sets the maximum size of the JSON payload to 30 megabytes. If the incoming JSON data is larger than this limit, the request will be rejected.
+// { extended: true }: This option allows for rich objects and arrays to be encoded into the URL-encoded format. you can send deeply nested objects.
+// urlencoded-> This specifies that the middleware should handle requests with URL-encoded form data. Form data is a common way to submit data from HTML forms, where key-value pairs are encoded in the request body.
+
+
+
+
+
 // to serve images inside public folder
 app.use(express.static('public')); 
-app.use('/images', express.static('images'));
+app.use('/images', express.static('images'));   // to create the virtual path and finally mounting with the directory
 
 
 dotenv.config();
